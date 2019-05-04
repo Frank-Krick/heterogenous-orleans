@@ -20,7 +20,7 @@ write_files:
       host    replication     all             ::1/128                 md5
     owner: postgres:postgres
     permissions: 0644
-    path: /etc/postgresql/10/main/pg_hba.conf
+    path: /root/pg_hba.conf
 
   - encoding: text/plain
     content: |
@@ -52,7 +52,7 @@ write_files:
       include_dir = 'conf.d'
     owner: postgres:postgres
     permissions: 0644
-    path: /etc/postgresql/10/main/postgresql.conf
+    path: /root/postgresql.conf
 
   - encoding: text/plain
     content: |
@@ -270,3 +270,5 @@ runcmd:
   - [ psql, -c, "CREATE USER orleans WITH PASSWORD 'rewgpionevofrrrfgjjj';"]
   - [ createdb, orleans ]
   - [ psql, -d, orleans, -a, -f, /root/orleans_sql_script.sql ]
+  - [ cp, /root/postgresql.conf, /etc/postgresql/10/main/postgresql.conf]
+  - [ cp, /root/postgresql.conf, /etc/postgresql/10/main/postgresql.conf]
