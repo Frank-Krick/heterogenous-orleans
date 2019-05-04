@@ -223,4 +223,4 @@ runcmd:
   - [ createdb, root ]
   - [ createuser, orleans ]
   - [ createdb, orleans ]
-  - [ psql, -d, orleans, -a, -f, orleans_sql_script.sql ]
+  - [ psql, -d, orleans, -a, -f, /root/orleans_sql_script.sql ]
