@@ -3,5 +3,12 @@ packages:
   - postgresql
   - postgresql-contrib
 
+users:
+  - name: orleans
+    system: true
+
 runcmd:
-  - [ sudo, -u, postgres, createuser, root, --superuser, --createdb ]
+  - [ sudo, -u, postgres, createuser, root, --superuser ]
+  - [ createdb, root ]
+  - [ createuser, orleans ]
+  - [ createdb, orleans ]
