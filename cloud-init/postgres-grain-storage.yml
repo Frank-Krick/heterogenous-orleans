@@ -50,7 +50,7 @@ write_files:
       lc_time = 'C.UTF-8'
       default_text_search_config = 'pg_catalog.english'
       include_dir = 'conf.d'
-    owner: root:root
+    owner: postgres:postgres
     permissions: 0644
     path: /etc/postgresql/10/main/postgresql.conf
 
@@ -260,7 +260,7 @@ write_files:
               AND Version IS NOT NULL AND Version = @GrainStateVersion AND @GrainStateVersion IS NOT NULL
           Returning Version as NewGrainStateVersion
       ');
-    owner: root:root
+    owner: postgres:postgres
     permissions: 0644
     path: /root/orleans_sql_script.sql
 
