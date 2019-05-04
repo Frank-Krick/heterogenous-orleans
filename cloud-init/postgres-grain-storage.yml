@@ -1,0 +1,7 @@
+#cloud-config
+packages:
+  - postgresql
+  - postgresql-contrib
+
+runcmd:
+  - [ ls ]
