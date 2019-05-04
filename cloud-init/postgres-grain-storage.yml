@@ -10,6 +10,14 @@ users:
 write_files:
   - encoding: utf-8
     content: |
+      CREATE TABLE OrleansQuery
+      (
+          QueryKey varchar(64) NOT NULL,
+          QueryText varchar(8000) NOT NULL,
+
+          CONSTRAINT OrleansQuery_Key PRIMARY KEY(QueryKey)
+      );
+
       CREATE TABLE Storage
       (
           grainidhash integer NOT NULL,
