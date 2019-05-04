@@ -4,4 +4,4 @@ packages:
   - postgresql-contrib
 
 runcmd:
-  - [ sudo, -u, postgres, createuser, root, --superuser ]
+  - [ sudo, -u, postgres, createuser, root, --superuser, --createdb ]
