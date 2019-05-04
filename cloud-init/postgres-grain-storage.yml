@@ -18,7 +18,7 @@ write_files:
       local   replication     all                                     peer
       host    replication     all             127.0.0.1/32            md5
       host    replication     all             ::1/128                 md5
-    owner: postgres:postgres
+    owner: root:root
     permissions: 0644
     path: /root/pg_hba.conf
 
@@ -50,7 +50,7 @@ write_files:
       lc_time = 'C.UTF-8'
       default_text_search_config = 'pg_catalog.english'
       include_dir = 'conf.d'
-    owner: postgres:postgres
+    owner: root:root
     permissions: 0644
     path: /root/postgresql.conf
 
@@ -271,4 +271,6 @@ runcmd:
   - [ createdb, orleans ]
   - [ psql, -d, orleans, -a, -f, /root/orleans_sql_script.sql ]
   - [ cp, /root/postgresql.conf, /etc/postgresql/10/main/postgresql.conf]
-  - [ cp, /root/postgresql.conf, /etc/postgresql/10/main/postgresql.conf]
+  - [ cp, /root/pg_hba.conf, /etc/postgresql/10/main/pg_hba.conf]
+  - [ systemctl, restart, postgresql ]
+
