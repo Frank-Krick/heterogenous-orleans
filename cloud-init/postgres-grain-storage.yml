@@ -8,7 +8,53 @@ users:
     system: true
 
 write_files:
-  - encoding: utf-8
+  - encoding: text/plain
+    content: |
+      local   all             postgres                                peer
+      local   all             all                                     peer
+      host    all             all             127.0.0.1/32            md5
+      host    all             orleans         10.2.0.0/16             md5
+      host    all             all             ::1/128                 md5
+      local   replication     all                                     peer
+      host    replication     all             127.0.0.1/32            md5
+      host    replication     all             ::1/128                 md5
+    owner: root:root
+    permissions: 0644
+    path: /etc/postgresql/10/main/pg_hba.conf
+
+  - encoding: text/plain
+    content: |
+      data_directory = '/var/lib/postgresql/10/main'
+      hba_file = '/etc/postgresql/10/main/pg_hba.conf'
+      ident_file = '/etc/postgresql/10/main/pg_ident.conf'
+      external_pid_file = '/var/run/postgresql/10-main.pid'
+      listen_addresses = '*'
+      port = 5432
+      max_connections = 100
+      unix_socket_directories = '/var/run/postgresql'
+      ssl = on
+      ssl_cert_file = '/etc/ssl/certs/ssl-cert-snakeoil.pem'
+      ssl_key_file = '/etc/ssl/private/ssl-cert-snakeoil.key'
+      password_encryption = md5
+      shared_buffers = 128MB
+      dynamic_shared_memory_type = posix
+      log_line_prefix = '%m [%p] %q%u@%d '
+      log_timezone = 'UCT'
+      cluster_name = '10/main'
+      stats_temp_directory = '/var/run/postgresql/10-main.pg_stat_tmp'
+      datestyle = 'iso, mdy'
+      timezone = 'UCT'
+      lc_messages = 'C.UTF-8'
+      lc_monetary = 'C.UTF-8'
+      lc_numeric = 'C.UTF-8'
+      lc_time = 'C.UTF-8'
+      default_text_search_config = 'pg_catalog.english'
+      include_dir = 'conf.d'
+    owner: root:root
+    permissions: 0644
+    path: /etc/postgresql/10/main/postgresql.conf
+
+  - encoding: text/plain
     content: |
       CREATE TABLE OrleansQuery
       (
@@ -221,6 +267,6 @@ write_files:
 runcmd:
   - [ sudo, -u, postgres, createuser, root, --superuser ]
   - [ createdb, root ]
-  - [ createuser, orleans ]
+  - [ psql, -c, "CREATE USER orleans WITH PASSWORD 'rewgpionevofrrrfgjjj';"]
   - [ createdb, orleans ]
   - [ psql, -d, orleans, -a, -f, /root/orleans_sql_script.sql ]
