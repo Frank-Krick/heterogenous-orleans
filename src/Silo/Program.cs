@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using Microsoft.Extensions.Hosting;
 using Npgsql;
+using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
 using Orleans.Statistics;
@@ -48,6 +49,8 @@ namespace Silo
                     {
                         siloBuilder.UseLinuxEnvironmentStatistics();
                     }
+
+                    siloBuilder.UseDashboard(options => { options.Port = 1337; });
                 });
 
             return hostBuilder.Build();
