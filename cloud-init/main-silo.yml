@@ -3,7 +3,7 @@ apt:
   preserve_sources_list: true
   sources:
     microsoft:
-      source: https://packages.microsoft.com/ubuntu/18.04/prod bionic main
+      source: "deb https://packages.microsoft.com/ubuntu/18.04/prod bionic main"
       keyid: BC528686B50D79E339D3721CEB3E94ADBE1229CF
 
 packages:
