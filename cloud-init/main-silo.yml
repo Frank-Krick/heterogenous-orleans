@@ -1,4 +1,6 @@
+#cloud-config
 apt:
+  preserve_sources_list: true
   sources:
     microsoft:
       source: https://packages.microsoft.com/ubuntu/18.04/prod bionic main
