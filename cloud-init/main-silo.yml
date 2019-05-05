@@ -9,3 +9,8 @@ apt:
 packages:
   - apt-transport-https
   - dotnet-sdk-2.2
+  - git
+
+runcmd:
+  - [mkdir, /root/heterogenous-silo]
+  - [git, clone, https://github.com/Frank-Krick/heterogenous-orleans, /root/heterogenous-silo]
