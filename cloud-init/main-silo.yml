@@ -33,3 +33,4 @@ runcmd:
   - [mkdir, /root/heterogenous-silo]
   - [git, clone, "https://github.com/Frank-Krick/heterogenous-orleans", /root/heterogenous-silo]
   - "HOME=/root dotnet build -c Release /root/heterogenous-silo/src/Silo/Silo.csproj"
+  - [systemctl, start, main-silo]
