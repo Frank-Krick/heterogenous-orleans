@@ -11,6 +11,24 @@ packages:
   - dotnet-sdk-2.2
   - git
 
+write_files:
+  - encoding: text/plain
+    content: |
+      [Unit]
+      Description=Main Silo
+      After=multi-user.target
+
+      [Service]
+      Type=idle
+      WorkingDirectory=/root/heterogenous-silo
+      ExecStart=/usr/bin/dotnet /root/heterogenous-silo/src/Silo/bin/Release/netcoreapp2.2/Silo.dll
+
+      [Install]
+      WantedBy=multi-user.target
+    owner: root:root
+    permissions: '0644'
+    path: /etc/systemd/system/main-silo.service
+
 runcmd:
   - [mkdir, /root/heterogenous-silo]
   - [git, clone, https://github.com/Frank-Krick/heterogenous-orleans, /root/heterogenous-silo]
