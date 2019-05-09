@@ -22,17 +22,19 @@ namespace Silo
             var hostBuilder = new HostBuilder()
                 .UseOrleans(siloBuilder =>
                 {
-                    var connectionStringBuilder = new NpgsqlConnectionStringBuilder();
-                    connectionStringBuilder.Host = "orleans-postgres";
-                    connectionStringBuilder.Database = "orleans";
-                    connectionStringBuilder.Username = "orleans";
-                    connectionStringBuilder.Password = "rewgpionevofrrrfgjjj";
+                    var connectionStringBuilder = new NpgsqlConnectionStringBuilder
+                    {
+                        Host = "orleans-postgres",
+                        Database = "orleans",
+                        Username = "orleans",
+                        Password = "rewgpionevofrrrfgjjj"
+                    };
                     siloBuilder.Configure((Action<ClusterOptions>) (options =>
                     {
                       options.ClusterId = "heterogenous-test-cluster";
                       options.ServiceId = "heterogenous-test-cluster";
                     }));
-                    siloBuilder.ConfigureEndpoints(siloPort: 11111, gatewayPort: 30000);
+                    siloBuilder.ConfigureEndpoints(11111, 30000);
                     siloBuilder.AddAdoNetGrainStorage("grain-storage", options =>
                     {
                         options.Invariant = "Npgsql";
